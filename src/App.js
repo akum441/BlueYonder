@@ -1,24 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import Virtualization from './Components/Virtualization';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from '../src/Redux/store';
+import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
+
+import NavBar from './Components/NavBar';
+import Pagination from './Components/Pagination';
+import InfiniteScrolling from './Components/InfiniteScrolling';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+    <Router>
+<NavBar/>
+        <Routes>
+          <Route path="/Virtu" element={<Virtualization />}  />
+        <Route path="/Pagination"   element={<Pagination />}  />
+      <Route path="/Scroll"  element={<InfiniteScrolling />} />
+        </Routes>
+    </Router>
+     </PersistGate>
+    </Provider>
   );
 }
 

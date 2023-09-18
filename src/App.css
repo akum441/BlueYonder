@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+
+button>a{
+  color: white;
+  text-decoration: none;
+}
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  position: relative;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.truncate:hover {
+  white-space: normal;
+  overflow: visible;
+  z-index: 1000;
+}
+.d-flex{
+  padding: 5px;
+}
