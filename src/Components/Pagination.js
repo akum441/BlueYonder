@@ -44,32 +44,34 @@ function Pagination() {
       </div>
 
       {/* Display entities in a Bootstrap table */}
-      <table className="table">
-        <thead>
-          <tr>
-            <th>API</th>
-            <th>Description</th>
-            <th>Auth</th>
-            <th>HTTPS</th>
-            <th>Cors</th>
-            <th>Link</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedEntities.map(entity => (
-            <tr key={entity.id}>
-              <td>{entity.API}</td>
-              <td>{entity.Description}</td>
-              <td>{entity.Auth}</td>
-              <td>{String(entity["HTTPS"])}</td>
-              <td>{entity.Cors}</td>
-              <td>{entity.Link}</td>
-              <td>{entity.Category}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+
+<table className="table table-fixed">
+<thead>
+<tr>
+<th className="width-api">API</th>
+<th className="width-description">Description</th>
+<th className="width-auth">Auth</th>
+<th className="width-https">HTTPS</th>
+<th className="width-cors">Cors</th>
+<th className="width-link">Link</th>
+<th className="width-category">Category</th>
+</tr>
+</thead>
+<tbody>
+  {displayedEntities.map(entity => (
+    <tr key={entity.id}>
+<td className="width-api cell-truncate">{entity.API}</td>
+<td className="width-description cell-truncate">{entity.Description}</td>
+<td className="width-auth cell-truncate">{entity.Auth}</td>
+<td className="width-https truncate">{String(entity["HTTPS"])}</td>
+<td className="width-cors cell-truncate">{entity.Cors}</td>
+<td className="width-link cell-truncate">{entity.Link}</td>
+<td className="width-category cell-truncate">{entity.Category}</td>
+</tr>
+  ))}
+</tbody>
+</table>
 
       {/* Pagination controls */}
       <nav>

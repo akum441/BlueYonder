@@ -42,26 +42,7 @@ button>a{
   color: white;
   text-decoration: none;
 }
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  position: relative;
-}
 
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-}
-
-.truncate:hover {
-  white-space: normal;
-  overflow: visible;
-  z-index: 1000;
-}
 .d-flex{
   padding: 5px;
 }
@@ -79,4 +60,47 @@ button>a{
 
 .table td {
   overflow-y: auto; /* Enables vertical scrolling */
+}
+
+/* Custom CSS for table layout */
+.table-fixed {
+  table-layout: fixed;
+}
+
+/* Custom CSS for table columns */
+.width-api { width: 10%; }
+.width-description { width: 30%; }
+.width-auth { width: 10%; }
+.width-https { width: 10%; }
+.width-cors { width: 10%; }
+.width-link { width: 20%; }
+.width-category { width: 10%; }
+
+/* Ensure content doesn't overflow */
+/* .cell-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
+
+.truncate, .cell-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  position: relative;
+}
+
+/* .truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+} */
+
+.truncate:hover,.cell-truncate:hover {
+  white-space: normal;
+  overflow: visible;
+  z-index: 1000;
 }
