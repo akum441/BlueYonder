@@ -56,7 +56,7 @@ function EntityList() {
   };
   return (
     <div className="container mt-4">
-      <div className="d-flex border bg-light">
+      <div className="d-flex border bg-light headingVirTable">
         {Object.keys(columnClasses).map((key) => (
           <div className={columnClasses[key]} key={key}>{key}</div>
         ))}

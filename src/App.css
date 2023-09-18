@@ -65,3 +65,18 @@ button>a{
 .d-flex{
   padding: 5px;
 }
+
+.table tr {
+  min-height: 50px;
+}
+
+
+.table td {
+  overflow: hidden;
+  text-overflow: ellipsis; /* This will show '...' for overflowing text */
+  white-space: nowrap; /* This ensures text doesn't wrap to the next line */
+}
+
+.table td {
+  overflow-y: auto; /* Enables vertical scrolling */
+}

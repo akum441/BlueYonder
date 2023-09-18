@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { entitiesFetched, setCurrentPage, setEntitiesPerPage } from '../Redux/paginationSlice';
+import { entitiesFetched, setCurrentPage, setEntitiesPerPage } from '../Redux/entitiesSlice';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Pagination() {
-  const entities = useSelector((state) => state.pagination.entities);
-  const currentPage = useSelector((state) => state.pagination.currentPage);
-  const entitiesPerPage = useSelector((state) => state.pagination.entitiesPerPage);
+  const maxPagesToShow = 5;
+  const entities = useSelector((state) => state.entities.entities);
+  const currentPage = useSelector((state) => state.entities.currentPage);
+  const entitiesPerPage = useSelector((state) => state.entities.entitiesPerPage);
   const dispatch = useDispatch();
 
   const totalPages = Math.ceil(entities.length / entitiesPerPage);
@@ -72,31 +73,39 @@ function Pagination() {
 
       {/* Pagination controls */}
       <nav>
-        <ul className="pagination">
-          {/* Previous Page Button */}
-          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-            <button className="page-link" onClick={() => dispatch(setCurrentPage(currentPage - 1))}>
-              Previous
-            </button>
-          </li>
+      <ul className="pagination">
+        {/* First and Previous Page Buttons */}
+        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => dispatch(setCurrentPage(1))}>First</button>
+        </li>
+        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => dispatch(setCurrentPage(currentPage - 1))}>Previous</button>
+        </li>
 
-          {/* Page Numbers */}
-          {[...Array(totalPages)].map((_, index) => (
-            <li className={`page-item ${index + 1 === currentPage ? 'active' : ''}`} key={index}>
-              <button className="page-link" onClick={() => dispatch(setCurrentPage(index + 1))}>
-                {index + 1}
+        {/* Page Numbers */}
+        {currentPage > 2 && <li className="page-item"><span className="page-link">...</span></li>}
+        {[...Array(Math.min(totalPages, maxPagesToShow))].map((_, index) => {
+          const pageNumber = currentPage <= 2 ? index + 1 : currentPage - 2 + index;
+          if (pageNumber > totalPages) return null;
+          return (
+            <li className={`page-item ${pageNumber === currentPage ? 'active' : ''}`} key={pageNumber}>
+              <button className="page-link" onClick={() => dispatch(setCurrentPage(pageNumber))}>
+                {pageNumber}
               </button>
             </li>
-          ))}
+          );
+        })}
+        {currentPage < totalPages - 1 && <li className="page-item"><span className="page-link">...</span></li>}
 
-          {/* Next Page Button */}
-          <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-            <button className="page-link" onClick={() => dispatch(setCurrentPage(currentPage + 1))}>
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
+        {/* Next and Last Page Buttons */}
+        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => dispatch(setCurrentPage(currentPage + 1))}>Next</button>
+        </li>
+        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+          <button className="page-link" onClick={() => dispatch(setCurrentPage(totalPages))}>Last</button>
+        </li>
+      </ul>
+    </nav>
     </div>
   );
 }

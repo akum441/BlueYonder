@@ -14,3 +14,7 @@ code {
 .container{
   margin: 20px;
 }
+
+.headingVirTable{
+  font-weight: 700;
+}
